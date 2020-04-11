@@ -10,8 +10,7 @@ class WerewolfTest < Minitest::Test
   end
 
   def test_it_has_a_location
-    skip
-    werewolf = Werewolf.new("David","London")
+    werewolf = Werewolf.new("David", "London")
     assert_equal "London", werewolf.location
   end
 
@@ -76,7 +75,7 @@ class WerewolfTest < Minitest::Test
     skip
     # your code here
   end
-  
+
   def test_cannot_consume_victim_if_in_human_form
     skip
     # your code here
