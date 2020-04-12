@@ -1,5 +1,5 @@
 class Wizard
-  attr_reader :name, :bearded
+  attr_reader :name, :bearded, :spells_cast
 
   def initialize(name, bearded: true)
     @name = name
@@ -8,7 +8,7 @@ class Wizard
   end
 
   def bearded?
-    @bearded
+    bearded
   end
 
   def incantation(phrase)
@@ -16,7 +16,7 @@ class Wizard
   end
 
   def rested?
-    true if @spells_cast < 3
+    spells_cast < 3
   end
 
   def cast
