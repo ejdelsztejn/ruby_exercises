@@ -1,5 +1,5 @@
 class Dragon
-  attr_reader :name, :color, :rider
+  attr_reader :name, :color, :rider, :meal_count
 
   def initialize(name, color, rider)
     @name = name
@@ -9,7 +9,7 @@ class Dragon
   end
 
   def hungry?
-    true unless @meal_count == 3
+    meal_count != 3
   end
 
   def eat
