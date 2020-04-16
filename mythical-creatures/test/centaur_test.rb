@@ -2,7 +2,6 @@ gem 'minitest', '~> 5.2'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/centaur'
-require 'pry'
 
 class CentaurTest < Minitest::Test
   def test_it_has_a_name
@@ -109,23 +108,30 @@ class CentaurTest < Minitest::Test
     assert_equal "Clop clop clop clop!!!", centaur.run
   end
 
-  def test_becomes_rested_after_drinking_a_potion
-    skip
-    # your code here
-    
+  def test_when_first_created_it_is_not_rested
+    centaur = Centaur.new("George","Palomino")
+    refute centaur.rested?
+  end
 
+  def test_becomes_rested_after_drinking_a_potion
+    centaur = Centaur.new("George","Palomino")
+    refute centaur.rested?
+    centaur.drink_potion
+    assert centaur.rested?
   end
 
   def test_can_only_drink_potion_while_standing
-    skip
-    # your code here
-
+    centaur = Centaur.new("George","Palomino")
+    centaur.lay_down
+    assert_equal "No way, I'll get a cramp if I drink that now!", centaur.drink_potion
   end
 
   def test_gets_sick_if_drinks_potion_while_rested
-    skip
-    # your code here
-
+    centaur = Centaur.new("George","Palomino")
+    centaur.drink_potion
+    centaur.lay_down
+    centaur.drink_potion
+    assert centaur.sick?
   end
 
 end

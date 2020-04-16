@@ -1,14 +1,15 @@
-require 'pry'
 class Centaur
   attr_reader :name, :breed, :cranky_count
 
   def initialize(name, breed)
-    @name = name
-    @breed = breed
-    @cranky = false
-    @standing = true
-    @laying = false
+    @name         = name
+    @breed        = breed
+    @cranky       = false
+    @standing     = true
+    @laying       = false
     @cranky_count = 0
+    @rested       = false
+    @sick         = false
   end
 
   def shoot
@@ -60,5 +61,24 @@ class Centaur
       @cranky = false
       @cranky_count = 0
     end
+  end
+
+  def rested?
+    @rested
+  end
+
+  def drink_potion
+    if @standing == true && @rested == false
+      @rested = true
+    elsif @standing == true && @rested == true
+      @sick = true
+      "Ohhh.. I don't feel so good..."
+    else
+      "No way, I'll get a cramp if I drink that now!"
+    end
+  end
+
+  def sick?
+    @sick
   end
 end
