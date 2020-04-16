@@ -22,7 +22,7 @@ class Centaur
   end
 
   def run
-    if @cranky == false && @standing == true
+    if cranky == false && standing == true
       @cranky_count += 1
       @cranky = true if cranky_count >= 3
       "Clop clop clop clop!!!"
