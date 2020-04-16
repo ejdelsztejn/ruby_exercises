@@ -9,15 +9,15 @@ attr_reader :name, :location, :form, :hungry
   end
 
   def human?
-    true if @form == "human"
+    true if form == "human"
   end
 
   def wolf?
-    true if @form == "wolf"
+    true if form == "wolf"
   end
 
   def change!
-    if @form == "human"
+    if form == "human"
       @form = "wolf"
       @hungry = true
     else
@@ -31,7 +31,13 @@ attr_reader :name, :location, :form, :hungry
   end
 
   def consume(victim)
-    "#{victim.name} is yummy!"
+    if form == "wolf"
+      @hungry = false
+      victim.dies
+      "#{victim.name} is yummy!"
+    else
+      "I can't eat #{victim.name}! How preposterous!"
+    end
   end
 
 end
@@ -42,5 +48,13 @@ class Victim
   def initialize(name)
     @name = name
     @status = :alive
+  end
+
+  def dies
+    @status = :dead
+  end
+
+  def dead?
+    true if status == :dead
   end
 end
