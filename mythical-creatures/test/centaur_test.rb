@@ -129,7 +129,6 @@ class CentaurTest < Minitest::Test
   def test_gets_sick_if_drinks_potion_while_rested
     centaur = Centaur.new("George","Palomino")
     centaur.drink_potion
-    centaur.lay_down
     centaur.drink_potion
     assert centaur.sick?
   end
