@@ -1,62 +1,59 @@
 class Centaur
-  attr_reader :name, :breed, :cranky_count
+  attr_reader :name, :breed, :cranky, :standing, :cranky_count, :rested, :sick
 
   def initialize(name, breed)
     @name         = name
     @breed        = breed
     @cranky       = false
     @standing     = true
-    @laying       = false
     @cranky_count = 0
     @rested       = false
     @sick         = false
   end
 
   def shoot
-    if @cranky == false && @laying == false
+    if cranky == false && standing == true
       @cranky_count += 1
-      @cranky = true if @cranky_count >= 3
-      return "Twang!!!"
+      @cranky = true if cranky_count >= 3
+      "Twang!!!"
     else
-      return "NO!"
+      "NO!"
     end
   end
 
   def run
-    if @cranky == false && @laying == false
+    if @cranky == false && @standing == true
       @cranky_count += 1
-      @cranky = true if @cranky_count >= 3
-      return "Clop clop clop clop!!!"
+      @cranky = true if cranky_count >= 3
+      "Clop clop clop clop!!!"
     else
-      return "NO!"
+      "NO!"
     end
   end
 
   def cranky?
-    @cranky
+    cranky
   end
 
   def standing?
-    @standing
+    standing
   end
 
   def laying?
-    @laying
+    !standing
   end
 
   def stand_up
     @standing = true
-    @laying = false
   end
 
   def lay_down
     @standing = false
-    @laying = true
   end
 
   def sleep
-    if @standing == true
-      return "NO!"
+    if standing == true
+      "NO!"
     else
       @cranky = false
       @cranky_count = 0
@@ -64,13 +61,13 @@ class Centaur
   end
 
   def rested?
-    @rested
+    rested
   end
 
   def drink_potion
-    if @standing == true && @rested == false
+    if standing == true && rested == false
       @rested = true
-    elsif @standing == true && @rested == true
+    elsif standing == true && rested == true
       @sick = true
       "Ohhh.. I don't feel so good..."
     else
@@ -79,6 +76,6 @@ class Centaur
   end
 
   def sick?
-    @sick
+    sick
   end
 end
