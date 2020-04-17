@@ -12,23 +12,17 @@ class Centaur
   end
 
   def shoot
-    if cranky == false && standing == true
-      @cranky_count += 1
-      @cranky = true if cranky_count >= 3
-      "Twang!!!"
-    else
-      "NO!"
-    end
+    return "NO!" unless cranky == false && standing == true
+    @cranky_count += 1
+    @cranky = true if cranky_count >= 3
+    "Twang!!!"
   end
 
   def run
-    if cranky == false && standing == true
-      @cranky_count += 1
-      @cranky = true if cranky_count >= 3
-      "Clop clop clop clop!!!"
-    else
-      "NO!"
-    end
+    return "NO!" unless cranky == false && standing == true
+    @cranky_count += 1
+    @cranky = true if cranky_count >= 3
+    "Clop clop clop clop!!!"
   end
 
   def cranky?
@@ -52,12 +46,9 @@ class Centaur
   end
 
   def sleep
-    if standing == true
-      "NO!"
-    else
-      @cranky = false
-      @cranky_count = 0
-    end
+    return "NO!" unless standing != true
+    @cranky = false
+    @cranky_count = 0
   end
 
   def rested?
