@@ -1,29 +1,24 @@
 class Werewolf
-  attr_reader :name, :location, :form, :hungry
+  attr_reader :name, :location, :human_form, :hungry
 
   def initialize(name, location)
-    @name     = name
-    @location = location
-    @form     = "human"
-    @hungry   = false
+    @name       = name
+    @location   = location
+    @human_form = true
+    @hungry     = false
   end
 
   def human?
-    form == "human"
+    human_form
   end
 
   def wolf?
-    form == "wolf"
+    !human_form
   end
 
   def change!
-    if form == "wolf"
-      @form   = "human"
-      @hungry = false
-    else
-      @form   = "wolf"
-      @hungry = true
-    end
+    @human_form = !human_form
+    @hungry = true
   end
 
   def hungry?
@@ -31,7 +26,7 @@ class Werewolf
   end
 
   def consume(victim)
-    return "I can't eat #{victim.name}! How preposterous!" unless form == "wolf"
+    return "I can't eat #{victim.name}! How preposterous!" unless human_form == false
 
     @hungry = false
     victim.dies
