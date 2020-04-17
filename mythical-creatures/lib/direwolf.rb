@@ -13,48 +13,40 @@ class Direwolf
   end
 
   def protects(stark)
-    if stark.location == home
-      @starks_to_protect << stark unless starks_to_protect.length >= 2
-      stark.change_safe_status
-    end
+    return false if stark.location != home
+    return false if starks_to_protect.length >= 2
+
+    @starks_to_protect << stark
+    stark.change_safe_status
   end
 
   def leaves(stark)
-    if @starks_to_protect.include?(stark)
-      @starks_to_protect.delete(stark)
-      stark.change_safe_status
-    else
-      stark
-    end
+    return stark unless @starks_to_protect.include?(stark)
+
+    @starks_to_protect.delete(stark)
+    stark.change_safe_status
   end
 end
 
 class Stark
-  attr_reader :name, :location
+  attr_reader :name, :location, :is_safe
 
   def initialize(name, location = "Winterfell")
     @name        = name
     @location    = location
-    @safe        = false
+    @is_safe     = false
   end
 
   def safe?
-    @safe
+    is_safe
   end
 
   def change_safe_status
-    if @safe == true
-      @safe = false
-    else
-      @safe = true
-    end
+    @is_safe = !is_safe
   end
 
   def house_words
-    if @safe == true
-      return 'The North Remembers'
-    elsif @safe == false
-      return 'Winter is Coming'
-    end
+    return 'The North Remembers' if safe?
+    return 'Winter is Coming' if !safe?
   end
 end
