@@ -15,10 +15,9 @@ class Ogre
   end
 
   def swing_at(human)
-    if human.notices_ogre? == true
-      @swings += 1
-      human.swinged_at?
-    end
+    return false unless human.notices_ogre?
+    @swings += 1
+    human.swinged_at?
   end
 
   def apologize(human)
@@ -27,14 +26,13 @@ class Ogre
 end
 
 class Human
-  attr_reader :name, :encounter_counter
+  attr_reader :name, :encounter_counter, :ogre_swings, :knocked_out
 
   def initialize(name = "Jane")
     @name              = name
     @encounter_counter = 0
     @ogre_swings       = 0
     @knocked_out       = false
-    @notices_ogre      = false
   end
 
   def encounter_ogre
@@ -42,12 +40,12 @@ class Human
   end
 
   def notices_ogre?
-    @notices_ogre = true if encounter_counter % 3 == 0
+    true if encounter_counter % 3 == 0
   end
 
   def swinged_at?
     @ogre_swings += 1
-    @knocked_out = true if @ogre_swings > 0 && @ogre_swings.even?
+    @knocked_out = true if ogre_swings > 0 && ogre_swings.even?
   end
 
   def hear_apology
@@ -55,7 +53,7 @@ class Human
   end
 
   def knocked_out?
-    @knocked_out
+    knocked_out
   end
 
 end
