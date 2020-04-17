@@ -2,9 +2,9 @@ class Dragon
   attr_reader :name, :color, :rider, :meal_count
 
   def initialize(name, color, rider)
-    @name = name
-    @color = color
-    @rider = rider
+    @name       = name
+    @color      = color
+    @rider      = rider
     @meal_count = 0
   end
 
