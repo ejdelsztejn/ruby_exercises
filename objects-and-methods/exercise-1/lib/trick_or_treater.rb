@@ -1,3 +1,5 @@
+require './lib/bag'
+
 class TrickOrTreater
   def initialize(costume)
     @costume = costume
@@ -20,3 +22,6 @@ class TrickOrTreater
     bag.count
   end
 end
+
+jessye = TrickOrTreater.new("witch")
+p jessye
